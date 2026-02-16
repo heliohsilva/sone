@@ -1,0 +1,32 @@
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    container_name: sone-db
+    environment:
+      MYSQL_ROOT_PASSWORD: passwd
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db_data:/var/lib/mysql
+    networks:
+      - sone-api
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_started
+    container_name: sone-api
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    networks:
+      - sone-api
+
+volumes:
+  db_data:
+
+networks:
+  sone-api:
