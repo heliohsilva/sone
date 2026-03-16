@@ -1,9 +1,9 @@
 CREATE USER IF NOT EXISTS 'golang'@'%' IDENTIFIED BY 'golang';
-CREATE DATABASE IF NOT EXISTS devbook;
+CREATE DATABASE IF NOT EXISTS sone;
 
-GRANT ALL PRIVILEGES ON devbook.* TO 'golang'@'%';
+GRANT ALL PRIVILEGES ON sone.* TO 'golang'@'%';
 
-USE devbook;
+USE sone;
 
 DROP TABLE IF EXISTS posts;
 DROP TABLE IF EXISTS users;
